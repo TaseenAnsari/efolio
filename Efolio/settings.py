@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from .stroages import MediaStorages
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -77,15 +78,15 @@ WSGI_APPLICATION = 'Efolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-'''DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}'''
+#'''DATABASES = {
+#    'default': {
+ #       'ENGINE': 'django.db.backends.sqlite3',
+ #       'NAME': BASE_DIR / 'db.sqlite3',
+ #   }
+#}'''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.posgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd64vio7pi5rh95',
         'USER': 'xkuormcndfhqmx',
         'PASSWORD': '5d4a75f10b24329795d63a628bb1bc1854dad9f14a654d0616d05a27e4959c30',
@@ -130,6 +131,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+AWS_ACCESS_KEY_ID = 'AKIA6OFWXEYOISOL5T5Y'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'efolio-media1'
+AWS_DEFAULT_ACL = None
+
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
@@ -142,5 +150,6 @@ STATICFILES_DIRS = [
 django_heroku.settings(locals())
 STATICFILES_STORAGE  = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
